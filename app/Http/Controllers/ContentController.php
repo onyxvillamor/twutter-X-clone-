@@ -9,10 +9,12 @@ class ContentController extends Controller
 {
     public function store(){
 
-         $twutter = Twutter::create([
-            'content' => request()->get('content', null)
+        request()->validate([
+            'content' => 'required|min:5|max:240'
         ]);
 
-        return redirect()->route('dashboard');
+        Twutter::create(['content' => request()->get('content', null)]);
+
+        return redirect()->route('dashboard')->with('success','Content created successfully!');
     }
 }
