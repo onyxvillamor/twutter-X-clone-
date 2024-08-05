@@ -40,16 +40,8 @@
     </div>
     <div class="col-6">
         @include('shared.success-message')
-        @include('shared.submit-content')
-
-        <hr>
-        @foreach ($twutters as $content)
         <div class="mt-3">
             @include('shared.twutter-card')
-        </div>
-        @endforeach
-        <div class="mt-2">
-            {{ $twutters->links() }}
         </div>
 
 

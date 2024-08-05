@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
-       
+
 
         return view('dashboard', [
-            'twutters' => Twutter::orderBy('created_at', 'DESC')->get()
+            'twutters' => Twutter::orderBy('created_at', 'DESC')->paginate(5)
         ]);
     }
 }

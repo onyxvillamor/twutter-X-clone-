@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
 
-Route::post('/content',[ContentController::class, 'store'])->name('twutter.create');
+Route::get('/contents/{content}',[ContentController::class, 'show'])->name('contents.show');
+
+Route::post('/contents',[ContentController::class, 'store'])->name('contents.store');
+
+Route::delete('/contents/{id}',[ContentController::class, 'destroy'])->name('contents.destroy');
 
 Route::get('/terms',function(){
     return view('terms');
