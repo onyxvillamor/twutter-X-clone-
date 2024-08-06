@@ -20,6 +20,10 @@ Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/contents/{content}',[ContentController::class, 'show'])->name('contents.show');
 
+Route::get('/contents/{content}/edit',[ContentController::class, 'edit'])->name('contents.edit');
+
+Route::put('/contents/{content}',[ContentController::class, 'update'])->name('contents.update');
+
 Route::post('/contents',[ContentController::class, 'store'])->name('contents.store');
 
 Route::delete('/contents/{id}',[ContentController::class, 'destroy'])->name('contents.destroy');
