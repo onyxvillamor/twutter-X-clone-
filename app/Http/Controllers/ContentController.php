@@ -9,9 +9,9 @@ class ContentController extends Controller
 {
     public function show(Twutter $content)
     {
-        return view('contents.show', [
-            'content' => $content
-        ]);
+
+        
+        return view('contents.show', ['content' => $content]);
     }
 
     public function store()

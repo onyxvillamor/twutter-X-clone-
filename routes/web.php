@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,8 @@ Route::put('/contents/{content}',[ContentController::class, 'update'])->name('co
 Route::post('/contents',[ContentController::class, 'store'])->name('contents.store');
 
 Route::delete('/contents/{id}',[ContentController::class, 'destroy'])->name('contents.destroy');
+
+Route::post('/contents/{content}/comments',[CommentController::class, 'store'])->name('contents.comments.store');
 
 Route::get('/terms',function(){
     return view('terms');
