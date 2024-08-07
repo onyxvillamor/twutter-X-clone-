@@ -10,9 +10,13 @@ class DashboardController extends Controller
 {
     public function index(){
 
+        $twutter = Twutter::orderBy('created_at', 'DESC');
 
-        return view('dashboard', [
-            'twutters' => Twutter::orderBy('created_at', 'DESC')->paginate(5)
-        ]);
+        if(request()->has('search')){
+            $twutter = $twutter->where('content', 'like', '%' . request()->get('search', '') . '%');
+        }
+
+
+        return view('dashboard', ['twutters' =>$twutter->paginate(5)]);
     }
 }

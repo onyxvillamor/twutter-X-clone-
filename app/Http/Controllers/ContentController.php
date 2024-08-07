@@ -18,7 +18,7 @@ class ContentController extends Controller
     {
 
         request()->validate([
-            'content' => 'required|min:5|max:240'
+            'content' => 'required|min:3|max:240'
         ]);
 
         Twutter::create(['content' => request()->get('content', null)]);
@@ -42,7 +42,7 @@ class ContentController extends Controller
     {
 
         request()->validate([
-            'content' => 'required|min:5|max:240'
+            'content' => 'required|min:3|max:240'
         ]);
 
         $content->content = request()->get('content', '');
