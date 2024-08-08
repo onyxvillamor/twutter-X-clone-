@@ -10,18 +10,18 @@ class ContentController extends Controller
     public function show(Twutter $content)
     {
 
-        
+
         return view('contents.show', ['content' => $content]);
     }
 
     public function store()
     {
 
-        request()->validate([
+       $validated =  request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
 
-        Twutter::create(['content' => request()->get('content', null)]);
+        Twutter::create($validated);
 
         return redirect()->route('dashboard')->with('success', 'Content created successfully!');
     }
@@ -41,12 +41,11 @@ class ContentController extends Controller
     public function update(Twutter $content)
     {
 
-        request()->validate([
+        $validated = request()->validate([
             'content' => 'required|min:3|max:240'
         ]);
 
-        $content->content = request()->get('content', '');
-        $content->save();
+        $content->update($validated);
 
         return redirect()->route('contents.show', $content->id)->with('success', 'Content updated successfully');
     }

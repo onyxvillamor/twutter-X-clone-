@@ -9,6 +9,8 @@ class Twutter extends Model
 {
     use HasFactory;
 
+    
+
     protected $fillable = [
         'content',
         'like'
