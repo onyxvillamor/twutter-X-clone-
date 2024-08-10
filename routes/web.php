@@ -18,32 +18,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
+Route::get('', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/contents/{content}',[ContentController::class, 'show'])->name('contents.show');
+Route::group(['prefix' => 'contents', 'as' => 'contents.'], function () {
 
-Route::get('/contents/{content}/edit',[ContentController::class, 'edit'])->name('contents.edit');
+    Route::post('', [ContentController::class, 'store'])->name('store');
 
-Route::put('/contents/{content}',[ContentController::class, 'update'])->name('contents.update');
+    Route::get('/{content}', [ContentController::class, 'show'])->name('show');
 
-Route::post('/contents',[ContentController::class, 'store'])->name('contents.store');
+    Route::group(['middleware' => ['auth']], function () {
+        
+        Route::get('/{content}/edit', [ContentController::class, 'edit'])->name('edit');
 
-Route::delete('/contents/{id}',[ContentController::class, 'destroy'])->name('contents.destroy');
+        Route::put('/{content}', [ContentController::class, 'update'])->name('update');
 
-Route::post('/contents/{content}/comments',[CommentController::class, 'store'])->name('contents.comments.store');
+        Route::delete('/{id}', [ContentController::class, 'destroy'])->name('destroy');
 
-Route::get('/register',[AuthController::class, 'register'])->name('register');
-
-Route::post('/register',[AuthController::class, 'store']);
-
-Route::get('/login',[AuthController::class, 'login'])->name('login');
-
-Route::post('/login',[AuthController::class, 'authenticate']);
-
-Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
-
-Route::get('/terms',function(){
-    return view('terms');
+        Route::post('/{content}/comments', [CommentController::class, 'store'])->name('comments.store');
+    });
 });
 
 
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+
+Route::post('/register', [AuthController::class, 'store']);
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/login', [AuthController::class, 'authenticate']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/terms', function () {
+    return view('terms');
+});
