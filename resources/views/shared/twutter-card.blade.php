@@ -3,7 +3,8 @@
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $content->user->name }}" alt="{{ $content->user->name }}">
+                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $content->user->name }}"
+                    alt="{{ $content->user->name }}">
                 <div>
                     <h5 class="card-title mb-0"><a href="#"> {{ $content->user->name }}
                         </a></h5>
@@ -13,10 +14,13 @@
                 <form method="POST" action="{{ route('contents.destroy', $content->id) }}">
                     @csrf
                     @method('delete')
-                    <a class="mx-2" href="{{ route('contents.edit', $content->id) }}">Edit</a>
-                    <a href="{{ route('contents.show', $content->id) }}">View</a>
-                    <button class="ms-1 btn btn-danger btn-sm">x</button>
-
+                    @if (auth()->id() == $content->user_id)
+                        <a class="mx-2" href="{{ route('contents.edit', $content->id) }}">Edit</a>
+                        <a href="{{ route('contents.show', $content->id) }}">View</a>
+                        <button class="ms-1 btn btn-danger btn-sm">x</button>
+                    @else
+                        <a href="{{ route('contents.show', $content->id) }}">View</a>
+                    @endif
                 </form>
 
             </div>
@@ -54,6 +58,6 @@
                     {{ $content->created_at }} </span>
             </div>
         </div>
-      @include('shared.comment-box')
+        @include('shared.comment-box')
     </div>
 </div>

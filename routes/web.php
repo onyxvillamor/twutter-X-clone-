@@ -27,7 +27,7 @@ Route::group(['prefix' => 'contents', 'as' => 'contents.'], function () {
     Route::get('/{content}', [ContentController::class, 'show'])->name('show');
 
     Route::group(['middleware' => ['auth']], function () {
-        
+
         Route::get('/{content}/edit', [ContentController::class, 'edit'])->name('edit');
 
         Route::put('/{content}', [ContentController::class, 'update'])->name('update');
@@ -39,15 +39,7 @@ Route::group(['prefix' => 'contents', 'as' => 'contents.'], function () {
 });
 
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
 
-Route::post('/register', [AuthController::class, 'store']);
-
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-
-Route::post('/login', [AuthController::class, 'authenticate']);
-
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/terms', function () {
     return view('terms');
