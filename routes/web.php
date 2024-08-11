@@ -20,26 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group(['prefix' => 'contents', 'as' => 'contents.'], function () {
+Route::resource('contents', ContentController::class)->except(['index','create','show'])->middleware('auth');
 
-    Route::post('', [ContentController::class, 'store'])->name('store');
+Route::resource('contents', ContentController::class)->only(['show']);
 
-    Route::get('/{content}', [ContentController::class, 'show'])->name('show');
-
-    Route::group(['middleware' => ['auth']], function () {
-
-        Route::get('/{content}/edit', [ContentController::class, 'edit'])->name('edit');
-
-        Route::put('/{content}', [ContentController::class, 'update'])->name('update');
-
-        Route::delete('/{id}', [ContentController::class, 'destroy'])->name('destroy');
-
-        Route::post('/{content}/comments', [CommentController::class, 'store'])->name('comments.store');
-    });
-});
-
-
-
+Route::resource('contents.comments', CommentController::class)->only(['store'])->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');

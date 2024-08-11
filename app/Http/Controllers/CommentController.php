@@ -13,7 +13,7 @@ class CommentController extends Controller
 
         $comment = new Comment();
         $comment->twutter_id = $content->id;
-        $comment->user_id = auth()->id;
+        $comment->user_id = auth()->id();
         $comment->content = request()->get('comment');
         $comment->save();
 
