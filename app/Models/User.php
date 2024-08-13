@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function contents(){
+        return $this->hasMany(Twutter::class)->latest();
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class)->latest();
+    }
 }

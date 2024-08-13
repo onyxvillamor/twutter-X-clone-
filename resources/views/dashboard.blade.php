@@ -8,9 +8,7 @@
         <div class="col-6">
             @include('shared.success-message')
             @include('shared.submit-content')
-
             <hr>
-
             @forelse ($twutters as $content)
                 <div class="mt-3">
                     @include('shared.twutter-card')

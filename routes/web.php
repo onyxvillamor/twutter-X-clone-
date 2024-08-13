@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,8 @@ Route::resource('contents', ContentController::class)->except(['index','create',
 Route::resource('contents', ContentController::class)->only(['show']);
 
 Route::resource('contents.comments', CommentController::class)->only(['store'])->middleware('auth');
+
+Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
 
 Route::get('/terms', function () {
     return view('terms');
