@@ -6,7 +6,7 @@
                     src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $content->user->name }}"
                     alt="{{ $content->user->name }}">
                 <div>
-                    <h5 class="card-title mb-0"><a href="#"> {{ $content->user->name }}
+                    <h5 class="card-title mb-0"><a href="{{ route('users.show', $content->user->id) }}"> {{ $content->user->name }}
                         </a></h5>
                 </div>
             </div>
